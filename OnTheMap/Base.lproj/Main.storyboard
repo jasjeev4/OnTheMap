@@ -16,23 +16,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-BY-s1U">
-                                <rect key="frame" x="107" y="377.5" width="200" height="141"/>
+                                <rect key="frame" x="107" y="382.5" width="200" height="131"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="Buf-RB-Uc5">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="45.5"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="Buf-RB-Uc5">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Wv1-50-t1q"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="3d2-cT-qV2">
-                                        <rect key="frame" x="0.0" y="55.5" width="200" height="45.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <textInputTraits key="textInputTraits" textContentType="password"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="3d2-cT-qV2">
+                                        <rect key="frame" x="0.0" y="51" width="200" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujr-3N-Jgj">
-                                        <rect key="frame" x="0.0" y="111" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="101" width="200" height="30"/>
                                         <state key="normal" title="Login"/>
                                     </button>
                                 </subviews>
