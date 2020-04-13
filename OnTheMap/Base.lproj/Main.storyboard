@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,6 +34,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujr-3N-Jgj">
                                         <rect key="frame" x="0.0" y="101" width="200" height="30"/>
                                         <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="onLoginInit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D5o-DH-i6n"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -45,10 +48,43 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="L3X-tw-qdD"/>
+                    <connections>
+                        <outlet property="passwordField" destination="3d2-cT-qV2" id="fv7-09-6p2"/>
+                        <outlet property="usernameField" destination="Buf-RB-Uc5" id="6J1-FP-KIG"/>
+                        <segue destination="TJM-BQ-sc5" kind="show" identifier="toMapView" id="QGN-LT-lbg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dew-Rx-6tg">
+            <objects>
+                <viewController id="TJM-BQ-sc5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yg1-RC-Oj6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2bK-nu-3Ik">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2bK-nu-3Ik" firstAttribute="trailing" secondItem="oiE-5P-3hZ" secondAttribute="trailing" id="PqW-3w-6hP"/>
+                            <constraint firstItem="2bK-nu-3Ik" firstAttribute="top" secondItem="oiE-5P-3hZ" secondAttribute="top" id="XVi-kb-lJc"/>
+                            <constraint firstItem="2bK-nu-3Ik" firstAttribute="leading" secondItem="oiE-5P-3hZ" secondAttribute="leading" id="aQq-p0-qMP"/>
+                            <constraint firstItem="2bK-nu-3Ik" firstAttribute="bottom" secondItem="oiE-5P-3hZ" secondAttribute="bottom" id="hjY-p5-S7x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oiE-5P-3hZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="S5z-TA-pc0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7tV-5T-yNc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="997.10144927536237" y="116.51785714285714"/>
         </scene>
     </scenes>
 </document>
