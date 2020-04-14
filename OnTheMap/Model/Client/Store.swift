@@ -11,4 +11,6 @@ import Foundation
 struct Store {
     var session: String?
     var uniqueKey: String?
+    
+    var students: [Student]
 }

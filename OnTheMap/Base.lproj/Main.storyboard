@@ -59,10 +59,10 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="dew-Rx-6tg">
             <objects>
-                <viewController id="TJM-BQ-sc5" sceneMemberID="viewController">
+                <viewController id="TJM-BQ-sc5" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yg1-RC-Oj6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,6 +81,9 @@
                         <viewLayoutGuide key="safeArea" id="oiE-5P-3hZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="S5z-TA-pc0"/>
+                    <connections>
+                        <outlet property="mapView" destination="2bK-nu-3Ik" id="a1C-X6-YHg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7tV-5T-yNc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

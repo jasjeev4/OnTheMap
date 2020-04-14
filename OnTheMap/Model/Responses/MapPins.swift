@@ -9,13 +9,19 @@
 import Foundation
 
 struct MapPins: Codable {
-    let results: [Results]
+    let results: [Student]
 }
 
-struct Results: Codable {
-    let firstName: String?
-    let lastName: String?
-    let longitude: String?
-    let latitute: String?
+struct Student: Codable {
+    let firstName: String
+    let lastName: String
+    let longitude: Double
+    let latitude: Double
+    let mapString: String
+    let mediaURL: String
+    let uniqueKey: String
+    let objectId: String?
+    let createdAt: String?
+    let updatedAt: String?
 }
 

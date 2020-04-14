@@ -14,6 +14,7 @@ class OnTheMapClient {
     struct Auth {
         static var sessionID = ""
         static var uniqueKey = ""
+        static var students = [] as [Student]
     }
     
     enum Endpoints {
@@ -45,7 +46,6 @@ class OnTheMapClient {
                 return
             }
             let decoder = JSONDecoder()
-            print(String(data: data, encoding: .utf8)!)
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
@@ -85,7 +85,7 @@ class OnTheMapClient {
             // discount 5 bytes
             let range = 5..<data.count
             let newData = data.subdata(in: range)
-            print(String(data: newData, encoding: .utf8)!)
+            // print(String(data: newData, encoding: .utf8)!)
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
@@ -113,21 +113,24 @@ class OnTheMapClient {
         let body = udacityCreds
         taskForPOSTRequest(url: Endpoints.login.url, responseType: Account.self, body: body) { response, error in
             if let response = response {
-                // Store credentials
-                Auth.sessionID = response.session?.id as! String
-                Auth.uniqueKey = response.account?.key as! String
-                completion(true, nil)
-            } else {
+                if(response.statusCode != nil) {
+                    // Store credentials
+                    Auth.sessionID = response.session?.id as! String
+                    Auth.uniqueKey = response.account?.key as! String
+                    completion(true, nil)
+                }
+                else {
                 completion(false, error)
+                }
             }
         }
     }
     
     class func loadPins(completion: @escaping (Bool, Error?) -> Void) {
-        print(Endpoints.pinsEndpoint.url)
         taskForGETRequest(url: Endpoints.pinsEndpoint.url, responseType: MapPins.self) { response, error in
             if let response = response {
-                print (response.results?[0].firstName)
+                Auth.students = response.results
+                // print(Auth.students[0].firstName)
                 completion(true, nil)
             } else {
                 completion(false, error)
