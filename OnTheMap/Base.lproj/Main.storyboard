@@ -33,7 +33,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujr-3N-Jgj">
                                         <rect key="frame" x="0.0" y="101" width="200" height="30"/>
-                                        <state key="normal" title="Login"/>
+                                        <state key="normal" title="LOGIN"/>
                                         <connections>
                                             <action selector="onLoginInit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D5o-DH-i6n"/>
                                         </connections>
