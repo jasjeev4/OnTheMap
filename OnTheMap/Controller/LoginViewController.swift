@@ -41,10 +41,15 @@ class LoginViewController: UIViewController {
             performSegue(withIdentifier: "toMapView", sender: nil)
         }
         else {
-            print("There was an error")
+            failureAlert(title: "Login Failed", message: "Could not login with those credientials")
         }
     }
     
+    func failureAlert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+    }
     
     
 //    func handleRequestTokenResponse(success: Bool, error: Error?) {
