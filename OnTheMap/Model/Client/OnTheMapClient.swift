@@ -85,7 +85,7 @@ class OnTheMapClient {
             // discount 5 bytes
             let range = 5..<data.count
             let newData = data.subdata(in: range)
-            // print(String(data: newData, encoding: .utf8)!)
+            print(String(data: newData, encoding: .utf8)!)
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
@@ -113,7 +113,7 @@ class OnTheMapClient {
         let body = udacityCreds
         taskForPOSTRequest(url: Endpoints.login.url, responseType: Account.self, body: body) { response, error in
             if let response = response {
-                if(response.statusCode != nil) {
+                if(response.statusCode == nil) {
                     // Store credentials
                     Auth.sessionID = response.session?.id as! String
                     Auth.uniqueKey = response.account?.key as! String
@@ -122,6 +122,9 @@ class OnTheMapClient {
                 else {
                 completion(false, error)
                 }
+            }
+            else {
+                completion(false, error)
             }
         }
     }
