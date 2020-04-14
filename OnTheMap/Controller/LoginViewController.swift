@@ -35,27 +35,17 @@ class LoginViewController: UIViewController {
     
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
-            print(OnTheMapClient.Auth.uniqueKey)
-            
-            // Load user pins
-            OnTheMapClient.loadPins(completion: handlePinsResponse(success:error:))
+            // print(OnTheMapClient.Auth.uniqueKey)
             
             // Perform segue to MapView
-            // performSegue(withIdentifier: "toMapView", sender: nil)
+            performSegue(withIdentifier: "toMapView", sender: nil)
         }
         else {
             print("There was an error")
         }
     }
     
-    func handlePinsResponse(success: Bool, error: Error?) {
-        if success {
-            print("Done")
-        }
-        else {
-            print("There was an error")
-        }
-    }
+    
     
 //    func handleRequestTokenResponse(success: Bool, error: Error?) {
 //        if success {
