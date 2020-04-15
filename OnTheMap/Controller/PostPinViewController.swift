@@ -11,20 +11,13 @@
     import MapKit
 
      class PostPinViewController: UIViewController, MKMapViewDelegate {
-        var location = ""
+        var coordinates: CLLocationCoordinate2D!
         @IBOutlet weak var mapView: MKMapView!
         
         override func viewDidLoad() {
-            print(location)
-            
-            // Geocode cooridinates
-            
-            OnTheMapClient.getCoordinate(addressString: location, completionHandler: handGeoencodeResponse(coordinates:error:))
-        }
-                
-        func handGeoencodeResponse(coordinates: CLLocationCoordinate2D, error: NSError?) {
             print(coordinates)
             
+            // Geocode cooridinates
             var annotations = [MKPointAnnotation]()
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinates
