@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import MapKit
 
 class OnTheMapClient {
     
@@ -113,7 +113,7 @@ class OnTheMapClient {
         let body = udacityCreds
         taskForPOSTRequest(url: Endpoints.login.url, responseType: Account.self, body: body) { response, error in
             if let response = response {
-                if(response.statusCode == nil) {
+                if(response.status == nil) {
                     // Store credentials
                     Auth.sessionID = response.session?.id as! String
                     Auth.uniqueKey = response.account?.key as! String
@@ -138,6 +138,23 @@ class OnTheMapClient {
             } else {
                 completion(false, error)
             }
+        }
+    }
+    
+    class func getCoordinate( addressString : String,
+            completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let location = placemark.location!
+                        
+                    completionHandler(location.coordinate, nil)
+                    return
+                }
+            }
+                
+            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
     }
     
