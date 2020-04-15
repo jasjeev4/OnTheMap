@@ -69,7 +69,7 @@ class OnTheMapClient {
         return task
     }
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, skipRange: Bool, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(body)
@@ -82,9 +82,15 @@ class OnTheMapClient {
                 return
             }
             let decoder = JSONDecoder()
-            // discount 5 bytes
-            let range = 5..<data.count
-            let newData = data.subdata(in: range)
+            var newData: Data
+            if(skipRange) {
+                // discount 5 bytes
+                let range = 5..<data.count
+                newData = data.subdata(in: range)
+            }
+            else {
+                newData = data
+            }
             print(String(data: newData, encoding: .utf8)!)
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
@@ -111,7 +117,7 @@ class OnTheMapClient {
         let loginReq = LoginRequest(username: username, password: password)
         let udacityCreds = Udacity(udacity: loginReq)
         let body = udacityCreds
-        taskForPOSTRequest(url: Endpoints.login.url, responseType: Account.self, body: body) { response, error in
+        taskForPOSTRequest(url: Endpoints.login.url, skipRange: true, responseType: Account.self, body: body) { response, error in
             if let response = response {
                 if(response.status == nil) {
                     // Store credentials
