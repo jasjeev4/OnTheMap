@@ -135,6 +135,24 @@ class OnTheMapClient {
         }
     }
     
+    class func postPin(firstNamd: String, lastName: String, mediaURL: String, mapString: String, latitude: Double, logitude: Double, completion: @escaping (Bool, Error?) -> Void) {
+        let obj = PinPost(uniqueKey: Auth.uniqueKey, firstName: firstNamd, lastName: lastName, mediaURL: mediaURL, mapString: mapString, latitude: latitude, longitude: logitude)
+        let body = obj
+        taskForPOSTRequest(url: Endpoints.login.url, skipRange: false, responseType: Account.self, body: body) { response, error in
+            if let response = response {
+                if(response.status == nil) {
+                    completion(true, nil)
+                }
+                else {
+                completion(false, error)
+                }
+            }
+            else {
+                completion(false, error)
+            }
+        }
+    }
+    
     class func loadPins(completion: @escaping (Bool, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.pinsEndpoint.url, responseType: MapPins.self) { response, error in
             if let response = response {
