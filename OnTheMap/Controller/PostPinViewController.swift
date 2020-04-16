@@ -6,26 +6,34 @@
 //  Copyright © 2020 Lorgarithmic Science. All rights reserved.
 //
 
-    import Foundation
-    import UIKit
-    import MapKit
 
-     class PostPinViewController: UIViewController, MKMapViewDelegate {
-        var coordinates: CLLocationCoordinate2D!
-        @IBOutlet weak var mapView: MKMapView!
+import Foundation
+import UIKit
+import MapKit
+
+ class PostPinViewController: UIViewController, MKMapViewDelegate {
+    var coordinates: CLLocationCoordinate2D!
+    @IBOutlet weak var mapView: MKMapView!
+    
+    override func viewDidLoad() {
+        print(coordinates)
         
-        override func viewDidLoad() {
-            print(coordinates)
-            
-            // Geocode cooridinates
-            var annotations = [MKPointAnnotation]()
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinates
-            annotations.append(annotation)
-            self.mapView.addAnnotations(annotations)
-            
-            let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-            
-            self.mapView.setRegion(region, animated: true)
-        }
+        // Geocode cooridinates
+        var annotations = [MKPointAnnotation]()
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinates
+        annotations.append(annotation)
+        self.mapView.addAnnotations(annotations)
+        
+        let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+        
+        self.mapView.setRegion(region, animated: true)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .plain, target: self, action: #selector(submitTapped))
+
+    } 
+    
+    @objc func submitTapped(){
+        print("Submit tappedd")
+    }
 }
