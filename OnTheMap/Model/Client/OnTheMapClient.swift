@@ -15,6 +15,7 @@ class OnTheMapClient {
         static var sessionID = ""
         static var uniqueKey = ""
         static var students = [] as [Student]
+        static var nickname = "John Do"
     }
     
     enum Endpoints {
@@ -22,12 +23,16 @@ class OnTheMapClient {
         
         case login
         case pinsEndpoint
+        case user
+        case location
         case postman
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.base + "session"
-            case .pinsEndpoint: return Endpoints.base + "StudentLocation"
+            case .user: return Endpoints.base + "users/"
+            case .location: return Endpoints.base + "StudentLocation"
+            case .pinsEndpoint: return Endpoints.base + "StudentLocation?limit=100&order=-updatedAt"
             case .postman: return "https://postman-echo.com/post"
             }
         }
@@ -135,15 +140,11 @@ class OnTheMapClient {
         }
     }
     
-    class func postPin(firstNamd: String, lastName: String, mediaURL: String, mapString: String, latitude: Double, logitude: Double, completion: @escaping (Bool, Error?) -> Void) {
-        let obj = PinPost(uniqueKey: Auth.uniqueKey, firstName: firstNamd, lastName: lastName, mediaURL: mediaURL, mapString: mapString, latitude: latitude, longitude: logitude)
-        let body = obj
-        taskForPOSTRequest(url: Endpoints.login.url, skipRange: false, responseType: Account.self, body: body) { response, error in
+    class func postPin(body: PinPost, completion: @escaping (Bool, Error?) -> Void) {
+        taskForPOSTRequest(url: Endpoints.location.url, skipRange: false, responseType: CreateObject.self, body: body) { response, error in
             if let response = response {
                 if(response.status == nil) {
                     completion(true, nil)
-                }
-                else {
                 completion(false, error)
                 }
             }
@@ -163,6 +164,26 @@ class OnTheMapClient {
                 completion(false, error)
             }
         }
+    }
+    
+    class func loadNickname(completion: @escaping (Bool, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.user.url, responseType: Nickname.self) { response, error in
+            if let response = response {
+                Auth.nickname = response.nickname!
+                // print(Auth.students[0].firstName)
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
+    
+    class func uploadPinHelper(coordinates: CLLocationCoordinate2D, location: String, mediaURL: String) {
+        // load user's name
+        let firstName = "First"
+        let lastName = "Last"
+        
+        let obj = PinPost(uniqueKey: Auth.uniqueKey, firstName: firstName, lastName: lastName, mediaURL: mediaURL, mapString: location, latitude: coordinates.latitude, longitude: coordinates.longitude)
     }
     
     class func getCoordinate( addressString : String,

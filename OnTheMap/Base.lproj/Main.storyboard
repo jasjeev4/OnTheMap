@@ -316,6 +316,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="d7D-kS-Ylx" customClass="PostPinViewController"/>
                     <connections>
+                        <outlet property="URLField" destination="bPk-B6-Ky9" id="yvX-hc-XDl"/>
                         <outlet property="mapView" destination="GbJ-qw-r6s" id="sjN-7a-RYZ"/>
                     </connections>
                 </viewController>

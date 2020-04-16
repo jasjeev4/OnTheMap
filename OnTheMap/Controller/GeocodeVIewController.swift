@@ -51,6 +51,7 @@ class GeocodeViewController: UIViewController {
         let vc = segue.destination as! PostPinViewController
         if let coordinates =  coordinates {
             vc.self.coordinates = coordinates
+            vc.self.location = locationField.text
         }
         else {
             print("Location not set")

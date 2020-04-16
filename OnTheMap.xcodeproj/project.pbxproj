@@ -13,6 +13,7 @@
 		C8334B502443268B005A96CA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8334B4F2443268B005A96CA /* Login.swift */; };
 		C8334B5324432748005A96CA /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8334B5224432748005A96CA /* OnTheMapClient.swift */; };
 		C8334B56244328E9005A96CA /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8334B55244328E9005A96CA /* Account.swift */; };
+		C85B6B032448C669006EBC45 /* Nickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B6B022448C669006EBC45 /* Nickname.swift */; };
 		C8780CCA2447708200B0B816 /* CreateObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8780CC92447708200B0B816 /* CreateObject.swift */; };
 		C87FD529244873B6002D0E58 /* PinPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87FD528244873B6002D0E58 /* PinPost.swift */; };
 		C881E4A82444AF6D005FAC1B /* MapPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = C881E4A72444AF6D005FAC1B /* MapPins.swift */; };
@@ -54,6 +55,7 @@
 		C8334B4F2443268B005A96CA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		C8334B5224432748005A96CA /* OnTheMapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClient.swift; sourceTree = "<group>"; };
 		C8334B55244328E9005A96CA /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		C85B6B022448C669006EBC45 /* Nickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nickname.swift; sourceTree = "<group>"; };
 		C8780CC92447708200B0B816 /* CreateObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateObject.swift; sourceTree = "<group>"; };
 		C87FD528244873B6002D0E58 /* PinPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPost.swift; sourceTree = "<group>"; };
 		C881E4A72444AF6D005FAC1B /* MapPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPins.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				C8334B55244328E9005A96CA /* Account.swift */,
 				C881E4A72444AF6D005FAC1B /* MapPins.swift */,
 				C8780CC92447708200B0B816 /* CreateObject.swift */,
+				C85B6B022448C669006EBC45 /* Nickname.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			files = (
 				C8334B5324432748005A96CA /* OnTheMapClient.swift in Sources */,
 				C881E4AF24460344005FAC1B /* CustomViewCell.swift in Sources */,
+				C85B6B032448C669006EBC45 /* Nickname.swift in Sources */,
 				C82D8EBA244717860098FE09 /* PostPinViewController.swift in Sources */,
 				C8AE1C1E2441FE8B00409D09 /* LoginViewController.swift in Sources */,
 				C8334B502443268B005A96CA /* Login.swift in Sources */,

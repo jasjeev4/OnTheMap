@@ -11,4 +11,5 @@ import Foundation
 struct CreateObject: Codable {
     var createdAt: String?
     var objectedId: String?
+    var status: String?
 }
