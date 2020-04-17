@@ -11,7 +11,6 @@ import MapKit
 import UIKit
 
 class GeocodeViewController: UIViewController {
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var locationField: UITextField!
     var coordinates: CLLocationCoordinate2D!
     

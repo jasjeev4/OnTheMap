@@ -18,8 +18,6 @@ import MapKit
     var location: String!
     
     override func viewDidLoad() {
-        print(coordinates)
-        
         // Geocode cooridinates
         var annotations = [MKPointAnnotation]()
         let annotation = MKPointAnnotation()
@@ -41,7 +39,6 @@ import MapKit
         // Send details to mode
         uploadPinHelper(coordinates: coordinates, location: location, mediaURL: URLField.text!)
         
-       // OnTheMapClient.postPin(firstNamd: String, lastName: <#T##String#>, mediaURL: <#T##String#>, mapString: <#T##String#>, latitude: <#T##Double#>, logitude: <#T##Double#>, completion: )
     }
     
     func uploadPinHelper(coordinates: CLLocationCoordinate2D, location: String, mediaURL: String) {
@@ -53,7 +50,7 @@ import MapKit
         OnTheMapClient.postPin(body: obj) { (success, error) in
             if success {
                 print("Success")
-                self.alertMsg(title: "Posted pin", message: "Your pin was posted")
+                // self.alertMsg(title: "Posted pin", message: "Your pin was posted")
                 // Go back to the previous ViewController
                 self.navigationController?.dismiss(animated: true)
             }

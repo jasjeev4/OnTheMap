@@ -147,7 +147,16 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="fPr-hU-pSt"/>
-                                    <barButtonItem image="arrow.clockwise" catalog="system" id="Gtv-qo-Jis"/>
+                                    <barButtonItem style="plain" id="CDn-rr-j1W">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VJv-Ee-OLY">
+                                            <rect key="frame" x="364" y="0.0" width="30" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="arrow.clockwise" catalog="system"/>
+                                            <connections>
+                                                <action selector="onRefresh:" destination="66J-91-AJx" eventType="touchUpInside" id="aHm-6Y-gLd"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -255,9 +264,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dQA-B3-iVf"/>
                     </view>
-                    <navigationItem key="navigationItem" id="s9n-Fm-SgC">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="pTu-MO-eVF"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="s9n-Fm-SgC"/>
                     <connections>
                         <outlet property="locationField" destination="uT9-GT-hoE" id="1Jy-yB-0dH"/>
                         <segue destination="qMM-Oq-dpF" kind="show" identifier="toLinkMap" id="8Pe-Ju-HSx"/>
