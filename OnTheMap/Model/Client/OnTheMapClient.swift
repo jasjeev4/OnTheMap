@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import MapKit
 
 class OnTheMapClient {
     
@@ -15,6 +15,7 @@ class OnTheMapClient {
         static var sessionID = ""
         static var uniqueKey = ""
         static var students = [] as [Student]
+        static var nickname = "John Do"
     }
     
     enum Endpoints {
@@ -22,12 +23,16 @@ class OnTheMapClient {
         
         case login
         case pinsEndpoint
+        case user
+        case location
         case postman
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.base + "session"
-            case .pinsEndpoint: return Endpoints.base + "StudentLocation"
+            case .user: return Endpoints.base + "users/"
+            case .location: return Endpoints.base + "StudentLocation"
+            case .pinsEndpoint: return Endpoints.base + "StudentLocation?limit=100&order=-updatedAt"
             case .postman: return "https://postman-echo.com/post"
             }
         }
@@ -69,7 +74,7 @@ class OnTheMapClient {
         return task
     }
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, skipRange: Bool, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(body)
@@ -82,10 +87,16 @@ class OnTheMapClient {
                 return
             }
             let decoder = JSONDecoder()
-            // discount 5 bytes
-            let range = 5..<data.count
-            let newData = data.subdata(in: range)
-            // print(String(data: newData, encoding: .utf8)!)
+            var newData: Data
+            if(skipRange) {
+                // discount 5 bytes
+                let range = 5..<data.count
+                newData = data.subdata(in: range)
+            }
+            else {
+                newData = data
+            }
+            print(String(data: newData, encoding: .utf8)!)
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
@@ -111,9 +122,9 @@ class OnTheMapClient {
         let loginReq = LoginRequest(username: username, password: password)
         let udacityCreds = Udacity(udacity: loginReq)
         let body = udacityCreds
-        taskForPOSTRequest(url: Endpoints.login.url, responseType: Account.self, body: body) { response, error in
+        taskForPOSTRequest(url: Endpoints.login.url, skipRange: true, responseType: Account.self, body: body) { response, error in
             if let response = response {
-                if(response.statusCode != nil) {
+                if(response.status == nil) {
                     // Store credentials
                     Auth.sessionID = response.session?.id as! String
                     Auth.uniqueKey = response.account?.key as! String
@@ -122,6 +133,23 @@ class OnTheMapClient {
                 else {
                 completion(false, error)
                 }
+            }
+            else {
+                completion(false, error)
+            }
+        }
+    }
+    
+    class func postPin(body: PinPost, completion: @escaping (Bool, Error?) -> Void) {
+        taskForPOSTRequest(url: Endpoints.location.url, skipRange: false, responseType: CreateObject.self, body: body) { response, error in
+            if let response = response {
+                if(response.status == nil) {
+                    completion(true, nil)
+                completion(false, error)
+                }
+            }
+            else {
+                completion(false, error)
             }
         }
     }
@@ -135,6 +163,43 @@ class OnTheMapClient {
             } else {
                 completion(false, error)
             }
+        }
+    }
+    
+    class func loadNickname(completion: @escaping (Bool, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.user.url, responseType: Nickname.self) { response, error in
+            if let response = response {
+                Auth.nickname = response.nickname!
+                // print(Auth.students[0].firstName)
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
+    
+    class func uploadPinHelper(coordinates: CLLocationCoordinate2D, location: String, mediaURL: String) {
+        // load user's name
+        let firstName = "First"
+        let lastName = "Last"
+        
+        let obj = PinPost(uniqueKey: Auth.uniqueKey, firstName: firstName, lastName: lastName, mediaURL: mediaURL, mapString: location, latitude: coordinates.latitude, longitude: coordinates.longitude)
+    }
+    
+    class func getCoordinate( addressString : String,
+            completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let location = placemark.location!
+                        
+                    completionHandler(location.coordinate, nil)
+                    return
+                }
+            }
+                
+            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
     }
     

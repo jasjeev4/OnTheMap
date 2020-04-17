@@ -9,7 +9,7 @@
 import Foundation
 
 struct Account: Codable {
-    let statusCode: Int?
+    let status: Int?
     let account: AccountDetails?
     let session: SessionDetails?
 }

@@ -13,15 +13,30 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate  {
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBAction func onRefresh(_ sender: Any) {
+        // Load user pins
+               
+        print("refresbing pins")
+               
+        OnTheMapClient.loadPins(completion: handlePinsResponse(success:error:))
+
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Load user pins
         OnTheMapClient.loadPins(completion: handlePinsResponse(success:error:))
+    
         
         // delegate
         mapView.delegate = self
     }
+
+    
+    
+        
+    
     
     func handlePinsResponse(success: Bool, error: Error?) {
         
