@@ -141,14 +141,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
+                                    <barButtonItem title="Logout" id="oM7-tK-mjJ">
+                                        <connections>
+                                            <action selector="onLogoutTap:" destination="66J-91-AJx" id="1Y5-nL-cwb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fPr-hU-pSt"/>
                                     <barButtonItem image="mappin" catalog="system" id="cSU-RQ-Jls">
                                         <connections>
                                             <segue destination="kyt-oJ-QKs" kind="show" id="3x2-kr-VPZ"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fPr-hU-pSt"/>
                                     <barButtonItem style="plain" id="CDn-rr-j1W">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VJv-Ee-OLY">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VJv-Ee-OLY">
                                             <rect key="frame" x="364" y="0.0" width="30" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="arrow.clockwise" catalog="system"/>
@@ -175,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KlD-Zo-Y99" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2398.5507246376815" y="-440.625"/>
+            <point key="canvasLocation" x="2399" y="-439"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ACF-oX-6su">

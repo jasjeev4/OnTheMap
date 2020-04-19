@@ -21,6 +21,10 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
         OnTheMapClient.loadPins(completion: handlePinsResponse(success:error:))
 
     }
+    @IBAction func onLogoutTap(_ sender: Any) {
+        OnTheMapClient.logout()
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,10 +37,6 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
         mapView.delegate = self
     }
 
-    
-    
-        
-    
     
     func handlePinsResponse(success: Bool, error: Error?) {
         

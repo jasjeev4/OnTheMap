@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
             performSegue(withIdentifier: "toMapView", sender: nil)
         }
         else {
-            failureAlert(title: "Login Failed", message: "Could not login with those credientials")
+            failureAlert(title: "Login Failed", message: error?.localizedDescription ?? "Couldn't login")
         }
     }
     
