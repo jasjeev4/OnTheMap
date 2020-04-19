@@ -36,11 +36,20 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let url = OnTheMapClient.Auth.students[indexPath.row].mediaURL
         let app = UIApplication.shared
-        if(url != "") {
+        if(verifyUrl (urlString: url)) {
             app.open(URL(string: url)!)
         }
     }
     
+    // Credit https://stackoverflow.com/questions/28079123/how-to-check-validity-of-url-in-swift
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
+    }
 }
 
 class CustomViewCell: UITableViewCell {
