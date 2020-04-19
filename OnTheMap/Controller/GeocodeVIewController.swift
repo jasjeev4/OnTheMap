@@ -13,6 +13,7 @@ import UIKit
 class GeocodeViewController: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     var coordinates: CLLocationCoordinate2D!
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +29,39 @@ class GeocodeViewController: UIViewController {
         self.navigationController?.dismiss(animated: true)
     }
     
+    func subscripbeToKeyboardNotifications() {
+        // On Keyboard show
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        // On keyboard hide
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+            // Move rest of the view to make room for keyboard
+            
+            view.frame.origin.y = -getKeyboardHeight(notification)
+    }
+
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
     @IBAction func submitClicked(_ sender: Any) {
         // check if result can be geocoded
+        activityIndicator.startAnimating()
         OnTheMapClient.getCoordinate(addressString: locationField.text!, completionHandler: handGeoencodeResponse(coordinates:error:))
-        
-        
+
     }
     
     func handGeoencodeResponse(coordinates: CLLocationCoordinate2D, error: NSError?) {
+        activityIndicator.stopAnimating()
         if(error != nil) {
             failureAlert(title: "Invalid address", message: "Couldn't find that location")
         }
