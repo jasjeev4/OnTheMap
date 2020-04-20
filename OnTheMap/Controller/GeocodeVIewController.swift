@@ -20,6 +20,7 @@ class GeocodeViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(GeocodeViewController.back(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
+        subscripbeToKeyboardNotifications()
     }
     
     @objc func back(sender: UIBarButtonItem) {
@@ -57,7 +58,6 @@ class GeocodeViewController: UIViewController {
         // check if result can be geocoded
         activityIndicator.startAnimating()
         OnTheMapClient.getCoordinate(addressString: locationField.text!, completionHandler: handGeoencodeResponse(coordinates:error:))
-
     }
     
     func handGeoencodeResponse(coordinates: CLLocationCoordinate2D, error: NSError?) {
