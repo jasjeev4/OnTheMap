@@ -13,13 +13,15 @@ import UIKit
 class GeocodeViewController: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     var coordinates: CLLocationCoordinate2D!
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(GeocodeViewController.back(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
+        subscripbeToKeyboardNotifications()
+        activityIndicator.hidesWhenStopped = true
     }
     
     @objc func back(sender: UIBarButtonItem) {
@@ -57,7 +59,6 @@ class GeocodeViewController: UIViewController {
         // check if result can be geocoded
         activityIndicator.startAnimating()
         OnTheMapClient.getCoordinate(addressString: locationField.text!, completionHandler: handGeoencodeResponse(coordinates:error:))
-
     }
     
     func handGeoencodeResponse(coordinates: CLLocationCoordinate2D, error: NSError?) {

@@ -256,6 +256,10 @@
                                     <action selector="submitClicked:" destination="aJh-NT-Ktf" eventType="touchUpInside" id="mwG-7f-L1v"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EsT-92-Ovi">
+                                <rect key="frame" x="197" y="316" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -271,6 +275,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="s9n-Fm-SgC"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="EsT-92-Ovi" id="9BX-qC-13o"/>
                         <outlet property="locationField" destination="uT9-GT-hoE" id="1Jy-yB-0dH"/>
                         <segue destination="qMM-Oq-dpF" kind="show" identifier="toLinkMap" id="8Pe-Ju-HSx"/>
                     </connections>
