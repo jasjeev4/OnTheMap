@@ -13,7 +13,7 @@ import UIKit
 class GeocodeViewController: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     var coordinates: CLLocationCoordinate2D!
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,7 @@ class GeocodeViewController: UIViewController {
         let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(GeocodeViewController.back(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
         subscripbeToKeyboardNotifications()
+        activityIndicator.hidesWhenStopped = true
     }
     
     @objc func back(sender: UIBarButtonItem) {
